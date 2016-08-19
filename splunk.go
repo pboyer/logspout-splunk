@@ -103,7 +103,6 @@ func (splunk *SplunkAdapter) writeData(b []byte) {
 			return
 		}
 
-		fmt.Printf("Wrote %v...", string(b))
 		b = b[bytesWritten:]
 
 		if len(b) == 0 {
@@ -123,7 +122,7 @@ func (splunk *SplunkAdapter) Stream(logstream chan *router.Message) {
 		select {
 		case splunk.queue <- message:
 		default:
-			fmt.Printf("Channel is full! Dropping events :-(")
+			fmt.Printf("Channel is full!")
 			continue
 		}
 	}
